@@ -35,7 +35,7 @@ class Phone(Field):
     def value(self, new_value):
         if len(new_value) != 10:
             raise  PhoneTooShortError("Phone number should be 10 digits long.")
-        if not self.value.isdigit():
+        if not new_value.isdigit():
             raise PhoneIncludesNotOnlyNumbersError("Phone number should only include digits.")
         self._value = new_value
 
@@ -82,7 +82,7 @@ class Record:
     def days_to_birthday(self):
         if self.birthday:
             return (self.birthday - datetime.today()).days
-        return f"There is ot birthday input for {self.name}."
+        return f"There is no birthday input for {self.name}."
         
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
@@ -163,4 +163,3 @@ class Iterable:
             self._start_point += self._number_to_display      
             return items_to_display      
         raise StopIteration
-    
